@@ -1,49 +1,642 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website cá nhân</title>
+
+    <title>John Li</title>
+    <meta name="description" content="Website cá nhân của John Li">
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: auto;
-            padding: 40px 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0a0a0a;
+            color: #f5f5f5;
             line-height: 1.6;
         }
 
-        h1 {
-            font-size: 40px;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
-        .card {
-            padding: 20px;
-            border: 1px solid #ddd;
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+        }
+
+        /* ===== NAVBAR ===== */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid #222;
+        }
+
+        .nav-inner {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #888;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #aaa;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* ===== HERO ===== */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 70px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hello {
+            color: #888;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: clamp(50px, 9vw, 100px);
+            line-height: 1;
+            letter-spacing: -4px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #777;
+        }
+
+        .hero-description {
+            max-width: 600px;
+            color: #999;
+            font-size: 18px;
+            margin-bottom: 35px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 22px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+
+        .btn-primary {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+
+        /* ===== SECTIONS ===== */
+
+        section {
+            padding: 100px 0;
+            border-top: 1px solid #1d1d1d;
+        }
+
+        .section-title {
+            font-size: 34px;
+            margin-bottom: 45px;
+        }
+
+        .section-title span {
+            color: #666;
+        }
+
+        /* ===== ABOUT ===== */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .about-text {
+            color: #999;
+            font-size: 17px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .info {
+            display: grid;
+            gap: 20px;
+        }
+
+        .info-item {
+            padding: 18px;
+            border: 1px solid #222;
+            border-radius: 10px;
+            background: #0e0e0e;
+        }
+
+        .info-item small {
+            color: #666;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* ===== SKILLS ===== */
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .skill {
+            padding: 30px;
+            border: 1px solid #222;
             border-radius: 12px;
-            margin-top: 20px;
+            background: #0e0e0e;
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            transform: translateY(-5px);
+            border-color: #555;
+        }
+
+        .skill h3 {
+            margin-bottom: 10px;
+        }
+
+        .skill p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* ===== PROJECTS ===== */
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .project {
+            padding: 30px;
+            min-height: 200px;
+            border: 1px solid #222;
+            border-radius: 12px;
+            background: #0e0e0e;
+            transition: 0.3s;
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+            border-color: #555;
+        }
+
+        .project-number {
+            color: #555;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .project h3 {
+            margin-bottom: 10px;
+        }
+
+        .project p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* ===== CONTACT ===== */
+
+        .contact {
+            text-align: center;
+            padding-bottom: 120px;
+        }
+
+        .contact h2 {
+            font-size: clamp(35px, 6vw, 60px);
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* ===== FOOTER ===== */
+
+        footer {
+            padding: 25px 0;
+            border-top: 1px solid #1d1d1d;
+            color: #555;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* ===== MOBILE ===== */
+
+        @media (max-width: 700px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .skills {
+                grid-template-columns: 1fr;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 75px 0;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h1>Xin chào 👋</h1>
+    <!-- NAVBAR -->
 
-    <p>Đây là website cá nhân của tôi.</p>
+    <nav>
+        <div class="container nav-inner">
 
-    <div class="card">
-        <h2>Giới thiệu</h2>
-        <p>
-            Tôi có thể viết thông tin giới thiệu của bạn ở đây.
-        </p>
-    </div>
+            <div class="logo">
+                John<span>Li</span>
+            </div>
 
-    <div class="card">
-        <h2>Liên hệ</h2>
-        <p>Email: example@email.com</p>
-    </div>
+            <ul class="nav-links">
+                <li><a href="#about">Giới thiệu</a></li>
+                <li><a href="#skills">Kỹ năng</a></li>
+                <li><a href="#projects">Dự án</a></li>
+                <li><a href="#contact">Liên hệ</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <header class="hero">
+        <div class="container">
+
+            <div class="hero-content">
+
+                <div class="hello">
+                    Xin chào, tôi là
+                </div>
+
+                <h1>
+                    John <span>Li.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Welcome to my personal website.
+                    Đây là không gian cá nhân nơi tôi chia sẻ
+                    thông tin, dự án và những điều mình quan tâm.
+                </p>
+
+                <div class="buttons">
+                    <a href="#about" class="btn btn-primary">
+                        Khám phá
+                    </a>
+
+                    <a href="#contact" class="btn">
+                        Liên hệ
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- ABOUT -->
+
+    <section id="about">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Giới thiệu <span>/ About</span>
+            </h2>
+
+            <div class="about-grid">
+
+                <div class="about-text">
+
+                    <p>
+                        Xin chào, tôi là John Li.
+                    </p>
+
+                    <p>
+                        Đây là website cá nhân của tôi.
+                        Tôi sử dụng nơi này để giới thiệu bản thân,
+                        chia sẻ những dự án và những thứ tôi đang quan tâm.
+                    </p>
+
+                    <p>
+                        Nội dung trên trang sẽ được cập nhật dần theo thời gian.
+                    </p>
+
+                </div>
+
+                <div class="info">
+
+                    <div class="info-item">
+                        <small>Tên</small>
+                        John Li
+                    </div>
+
+                    <div class="info-item">
+                        <small>Website</small>
+                        tuanlewithlove.github.io
+                    </div>
+
+                    <div class="info-item">
+                        <small>Trạng thái</small>
+                        Online
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SKILLS -->
+
+    <section id="skills">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Kỹ năng <span>/ Skills</span>
+            </h2>
+
+            <div class="skills">
+
+                <div class="skill">
+                    <h3>Networking</h3>
+                    <p>
+                        Network, Wi-Fi, thiết bị mạng và hệ thống.
+                    </p>
+                </div>
+
+                <div class="skill">
+                    <h3>Technology</h3>
+                    <p>
+                        Quan tâm đến công nghệ, phần cứng,
+                        IoT và hệ thống thông minh.
+                    </p>
+                </div>
+
+                <div class="skill">
+                    <h3>Development</h3>
+                    <p>
+                        HTML, CSS, JavaScript và các công nghệ web.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section id="projects">
+
+        <div class="container">
+
+            <h2 class="section-title">
+                Dự án <span>/ Projects</span>
+            </h2>
+
+            <div class="projects">
+
+                <div class="project">
+                    <div class="project-number">01</div>
+
+                    <h3>Personal Website</h3>
+
+                    <p>
+                        Website cá nhân được xây dựng bằng
+                        HTML, CSS và JavaScript.
+                    </p>
+                </div>
+
+                <div class="project">
+                    <div class="project-number">02</div>
+
+                    <h3>Smart Home</h3>
+
+                    <p>
+                        Các dự án liên quan đến Home Assistant,
+                        IoT và tự động hóa.
+                    </p>
+                </div>
+
+                <div class="project">
+                    <div class="project-number">03</div>
+
+                    <h3>Networking</h3>
+
+                    <p>
+                        Các dự án và nghiên cứu về mạng,
+                        Wi-Fi và hệ thống thiết bị.
+                    </p>
+                </div>
+
+                <div class="project">
+                    <div class="project-number">04</div>
+
+                    <h3>Coming Soon</h3>
+
+                    <p>
+                        Những dự án mới sẽ được cập nhật tại đây.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section id="contact" class="contact">
+
+        <div class="container">
+
+            <h2>Let's connect.</h2>
+
+            <p>
+                Bạn có thể liên hệ với tôi qua các kênh bên dưới.
+            </p>
+
+            <div class="socials">
+
+                <!-- Thay link bên dưới bằng link thật của bạn -->
+
+                <a href="https://github.com/tuanlewithlove"
+                   target="_blank"
+                   class="btn">
+                    GitHub
+                </a>
+
+                <a href="mailto:your@email.com"
+                   class="btn">
+                    Email
+                </a>
+
+                <a href="#"
+                   class="btn">
+                    Facebook
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+        <div class="container">
+            © 2026 John Li. All rights reserved.
+        </div>
+    </footer>
+
+
+    <script>
+
+        // Hiệu ứng xuất hiện nhẹ khi cuộn trang
+
+        const elements = document.querySelectorAll(
+            '.skill, .project, .info-item'
+        );
+
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+
+                    }
+
+                });
+            },
+            {
+                threshold: 0.1
+            }
+        );
+
+        elements.forEach(element => {
+
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'all 0.6s ease';
+
+            observer.observe(element);
+
+        });
+
+    </script>
 
 </body>
 </html>
+```
