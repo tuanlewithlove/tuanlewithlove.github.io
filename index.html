@@ -28,6 +28,7 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
+            user-select: none;
             line-height: 1.6;
             background: #ffffff;
             color: #111111;
@@ -204,7 +205,7 @@
             display: inline-block;
             padding: 12px 22px;
             border: 1px solid #0076DF;
-            border-radius: 8px;
+            border-radius: 30px;
             font-size: 14px;
             color: #0076DF;
             background: #ffffff;
@@ -720,7 +721,7 @@
             <div class="hero-content">
 
                 <div class="hello">
-                    Xin chào, tôi là
+                    Xin chào, mình là
                 </div>
 
                 <h1>
@@ -729,7 +730,7 @@
 
                 <p class="hero-description">
                     Welcome to my personal website.
-                    Đây là không gian cá nhân nơi tôi chia sẻ
+                    Đây là không gian cá nhân nơi mình chia sẻ
                     thông tin, dự án và những điều mình quan tâm.
                 </p>
 
@@ -775,13 +776,13 @@
                 <div class="about-text reveal">
 
                     <p>
-                        Xin chào, tôi là Lê Thanh Tuấn.
+                        Tuấn xin chào Bạn!
                     </p>
 
                     <p>
-                        Đây là website cá nhân của tôi.
-                        Tôi sử dụng nơi này để giới thiệu bản thân,
-                        chia sẻ những dự án và những thứ tôi đang quan tâm.
+                        Đây là website cá nhân của mình.
+                        Mình sử dụng nơi này để giới thiệu bản thân,
+                        chia sẻ những dự án và những thứ mình đang quan tâm.
                     </p>
 
                     <p>
@@ -815,7 +816,7 @@
 
                         <small>Trạng thái</small>
 
-                        Online
+                        Chưa kết hôn
 
                     </div>
 
@@ -988,7 +989,7 @@
             </h2>
 
             <p class="reveal">
-                Bạn có thể liên hệ với tôi qua các kênh bên dưới.
+                Bạn có thể liên hệ với mình qua các kênh bên dưới.
             </p>
 
 
@@ -1096,8 +1097,12 @@
 
         });
 
-    </script>
+        document.addEventListener('copy', function(e) {
+            e.preventDefault();
+            alert('Nội dung này không cho phép sao chép.');
+        }); 
 
+    </script>
 
 </body>
 
