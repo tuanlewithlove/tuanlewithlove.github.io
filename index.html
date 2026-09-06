@@ -8,6 +8,8 @@
     <title>John Li</title>
     <meta name="description" content="Website cá nhân của John Li">
 
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
     <style>
         /* =========================
            RESET
@@ -56,7 +58,7 @@
             width: 100%;
             z-index: 1000;
 
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(245, 245, 245, 0.88);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
 
@@ -124,6 +126,31 @@
             animation: heroFade 1s ease forwards;
         }
 
+        .hero-layout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 60px;
+        }
+
+        .avatar {
+        width: 220px;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 1px solid #ddd;
+        padding: 5px;
+        background: #fff;
+        transition:
+            transform 0.4s ease,
+            border-color 0.4s ease;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            border-color: #999;
+        }
+
         @keyframes heroFade {
             from {
                 opacity: 0;
@@ -175,14 +202,12 @@
 
         .btn {
             display: inline-block;
-
             padding: 12px 22px;
-
-            border: 1px solid #ccc;
+            border: 1px solid #0076DF;
             border-radius: 8px;
-
             font-size: 14px;
-
+            color: #0076DF;
+            background: #ffffff;
             transition:
                 transform 0.3s ease,
                 background 0.3s ease,
@@ -192,17 +217,15 @@
 
         .btn:hover {
             transform: translateY(-3px);
-
-            background: #111;
+            background: #0076DF;
             color: white;
-
-            border-color: #111;
+            border-color: white;
         }
 
         .btn-primary {
-            background: #111;
+            background: #0076DF;
             color: white;
-            border-color: #111;
+            border-color: #0076DF;
         }
 
 
@@ -556,6 +579,15 @@
                 border-top-color: #1d1d1d;
                 color: #555;
             }
+
+            .avatar {
+                background: #0a0a0a;
+                border-color: #333;
+            }
+
+            .avatar:hover {
+                border-color: #666;
+            }
         }
 
 
@@ -592,6 +624,15 @@
 
             section {
                 padding: 75px 0;
+            }
+
+            .avatar {
+                background: #0a0a0a;
+                border-color: #333;
+            }
+
+            .avatar:hover {
+                border-color: #666;
             }
         }
 
@@ -631,7 +672,7 @@
         <div class="container nav-inner">
 
             <div class="logo">
-                Tuấn<span>Lê</span>
+                Tuấn<span> Lê</span>
             </div>
 
             <ul class="nav-links">
@@ -664,8 +705,9 @@
     ========================= -->
 
     <header class="hero">
-
         <div class="container">
+
+        <div class="hero-layout">
 
             <div class="hero-content">
 
@@ -684,7 +726,6 @@
                 </p>
 
                 <div class="buttons">
-
                     <a href="#about" class="btn btn-primary">
                         Khám phá
                     </a>
@@ -692,14 +733,21 @@
                     <a href="#contact" class="btn">
                         Liên hệ
                     </a>
-
                 </div>
 
             </div>
 
+            <!-- AVATAR -->
+            <img
+                src="images/avatar.JPG"
+                alt="Lê Thanh Tuấn"
+                class="avatar"
+            >
+
         </div>
 
-    </header>
+    </div>
+</header>
 
 
     <!-- =========================
