@@ -664,22 +664,93 @@
                 padding: 75px 0;
             }
 
-            .project-slide {
-                grid-template-columns: 1fr;
+            /* =========================
+               PROJECT SLIDER - MOBILE
+               ========================= */
+
+            .project-slider {
+                width: 100%;
+                min-height: 0;
+                margin-top: 35px;
+                border-radius: 14px;
             }
 
+            .project-slide {
+                grid-template-columns: 1fr;
+                min-height: 0;
+
+                transform: translate3d(22px, 0, 0);
+            }
+
+            .project-slide.active {
+                min-height: 0;
+                transform: translate3d(0, 0, 0);
+            }
+
+            .project-slide.slide-left {
+                transform: translate3d(-22px, 0, 0);
+            }
+
+            .project-slide.slide-right {
+                transform: translate3d(22px, 0, 0);
+            }
+
+            /*
+             * Mobile: giữ tỷ lệ khung ảnh ổn định.
+             * Ảnh không bị bóp méo vì vẫn giữ object-fit: cover.
+             */
             .project-slide img {
-                min-height: 230px;
-                height: 230px;
+                width: 100%;
+                height: 240px;
+                min-height: 240px;
+
+                object-fit: cover;
+                object-position: center;
+
+                display: block;
             }
 
             .project-content {
-                padding: 30px;
-                padding-bottom: 60px;
+                min-height: 260px;
+                padding: 28px 24px 60px;
+
+                justify-content: flex-start;
+
+                transform: translate3d(15px, 0, 0);
+            }
+
+            .project-slide.active .project-content {
+                transform: translate3d(0, 0, 0);
+            }
+
+            .project-number {
+                font-size: 12px;
+                margin-bottom: 12px;
             }
 
             .project-content h3 {
                 font-size: 24px;
+                line-height: 1.25;
+                margin-bottom: 12px;
+            }
+
+            .project-content p {
+                font-size: 14px;
+                line-height: 1.7;
+                margin-bottom: 22px;
+            }
+
+            .project-content .btn {
+                padding: 10px 18px;
+                font-size: 13px;
+            }
+
+            .project-prev,
+            .project-next {
+                width: 36px;
+                height: 36px;
+                font-size: 20px;
+                top: 120px;
             }
 
             .project-prev {
@@ -689,8 +760,42 @@
             .project-next {
                 right: 10px;
             }
+
+            .project-dots {
+                bottom: 15px;
+            }
+
+            .project-dot {
+                width: 7px;
+                height: 7px;
+            }
+
+            .project-dot.active {
+                width: 20px;
+            }
         }
 
+
+
+        @media (max-width: 420px) {
+            .project-slide img {
+                height: 215px;
+                min-height: 215px;
+            }
+
+            .project-content {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .project-content h3 {
+                font-size: 22px;
+            }
+
+            .project-content p {
+                font-size: 13.5px;
+            }
+        }
 
         /* =========================
            REDUCE MOTION
@@ -711,60 +816,79 @@
             }
         }
         
-        .project-slider {
-    position: relative;
-    max-width: 1000px;
-    min-height: 420px;
-    margin: 50px auto 0;
-    overflow: hidden;
+        /* =========================
+           PROJECT SLIDER
+           ========================= */
 
-    border: 1px solid #ddd;
-    border-radius: 16px;
-    background: #fff;
-}
+        .project-slider {
+            position: relative;
+            max-width: 1000px;
+            min-height: 420px;
+            margin: 50px auto 0;
+            overflow: hidden;
+
+            border: 1px solid #ddd;
+            border-radius: 16px;
+            background: #fff;
+
+            /* Prevent layout jumps while slides animate */
+            isolation: isolate;
+        }
 
         .project-slide {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 420px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 420px;
 
-    position: absolute;
-    inset: 0;
+            position: absolute;
+            inset: 0;
 
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
 
-    transform: translateX(35px);
-    transition:
-        opacity 0.6s ease,
-        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-        visibility 0.6s ease;
-}
+            transform: translate3d(35px, 0, 0);
 
-.project-slide.active {
-    position: relative;
+            transition:
+                opacity 0.55s ease,
+                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0.55s ease;
+        }
 
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+        .project-slide.active {
+            position: relative;
 
-    transform: translateX(0);
-}
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+
+            transform: translate3d(0, 0, 0);
+        }
+
+        .project-slide.slide-left {
+            transform: translate3d(-35px, 0, 0);
+        }
+
+        .project-slide.slide-right {
+            transform: translate3d(35px, 0, 0);
+        }
 
         .project-slide img {
             width: 100%;
             height: 100%;
             min-height: 420px;
+
             object-fit: cover;
-        }
-        .project-slide img {
+            object-position: center;
+
+            display: block;
+
+            transform: scale(1.035);
+            filter: brightness(0.97);
+
             transition:
                 transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
                 filter 0.6s ease;
-            
-            transform: scale(1.04);
-            filter: brightness(0.96);
         }
 
         .project-slide.active img {
@@ -777,16 +901,18 @@
             flex-direction: column;
             justify-content: center;
             padding: 50px;
+
             opacity: 0;
-            transform: translateX(25px);
+            transform: translate3d(22px, 0, 0);
 
             transition:
-                opacity 0.55s ease 0.12s,
-                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+                opacity 0.55s ease 0.10s,
+                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.10s;
         }
+
         .project-slide.active .project-content {
             opacity: 1;
-            transform: translateX(0);
+            transform: translate3d(0, 0, 0);
         }
 
         .project-number {
@@ -814,6 +940,8 @@
         .project-next {
             position: absolute;
             top: 50%;
+            z-index: 5;
+
             transform: translateY(-50%);
 
             width: 42px;
@@ -822,16 +950,18 @@
             border: 1px solid #0076DF;
             border-radius: 50%;
 
-            background: white;
+            background: rgba(255, 255, 255, 0.94);
             color: #0076DF;
 
             font-size: 24px;
+            line-height: 1;
             cursor: pointer;
 
             transition:
                 background 0.3s ease,
                 color 0.3s ease,
-                transform 0.3s ease;
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
         }
 
         .project-prev {
@@ -847,10 +977,12 @@
             background: #0076DF;
             color: white;
             transform: translateY(-50%) scale(1.08);
+            box-shadow: 0 6px 18px rgba(0, 118, 223, 0.18);
         }
 
         .project-dots {
             position: absolute;
+            z-index: 6;
             bottom: 18px;
             left: 50%;
             transform: translateX(-50%);
@@ -863,33 +995,26 @@
             width: 8px;
             height: 8px;
 
+            border: 0;
+            padding: 0;
             border-radius: 50%;
             background: #ccc;
 
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition:
+                width 0.3s ease,
+                background 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .project-dot:hover {
+            transform: scale(1.15);
         }
 
         .project-dot.active {
             width: 24px;
             border-radius: 10px;
             background: #0076DF;
-        }
-
-        .project-slide.slide-right {
-            transform: translateX(35px);
-        }
-
-        .project-slide.slide-left {
-            transform: translateX(-35px);
-        }
-
-        .project-slide.active {
-            position: relative;
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-            transform: translateX(0);
         }
     </style>
 </head>
@@ -1318,16 +1443,17 @@
     </script>
     <script>
     let currentProject = 0;
-    let projectDirection = 1;
+    let autoSlideTimer;
 
     const projectSlides = document.querySelectorAll(".project-slide");
     const projectDots = document.querySelectorAll(".project-dot");
+    const projectSlider = document.querySelector(".project-slider");
 
     function showProject(index, direction = 1) {
+        if (!projectSlides.length) return;
 
         projectSlides.forEach(slide => {
-            slide.classList.remove("active");
-            slide.classList.remove("slide-left", "slide-right");
+            slide.classList.remove("active", "slide-left", "slide-right");
         });
 
         projectDots.forEach(dot => {
@@ -1338,40 +1464,99 @@
 
         const currentSlide = projectSlides[currentProject];
 
-        if (direction > 0) {
-            currentSlide.classList.add("slide-right");
-        } else {
-            currentSlide.classList.add("slide-left");
-        }
+        currentSlide.classList.add(
+            direction < 0 ? "slide-left" : "slide-right"
+        );
 
-        // ép browser nhận trạng thái ban đầu trước khi active
+        // Cho browser render trạng thái ban đầu trước khi chạy transition.
         requestAnimationFrame(() => {
-            currentSlide.classList.add("active");
+            requestAnimationFrame(() => {
+                currentSlide.classList.add("active");
+            });
         });
 
-        projectDots[currentProject].classList.add("active");
+        if (projectDots[currentProject]) {
+            projectDots[currentProject].classList.add("active");
+        }
     }
 
     function changeProject(direction) {
+        let nextProject = currentProject + direction;
 
-        currentProject += direction;
-
-        if (currentProject >= projectSlides.length) {
-            currentProject = 0;
+        if (nextProject >= projectSlides.length) {
+            nextProject = 0;
         }
 
-        if (currentProject < 0) {
-            currentProject = projectSlides.length - 1;
+        if (nextProject < 0) {
+            nextProject = projectSlides.length - 1;
         }
 
-        showProject(currentProject, direction);
+        showProject(nextProject, direction);
     }
 
+    function startAutoSlide() {
+        clearInterval(autoSlideTimer);
 
-    // Tự động chuyển slide mỗi 5 giây
-    setInterval(() => {
-        changeProject(1);
-    }, 5000);
+        autoSlideTimer = setInterval(() => {
+            changeProject(1);
+        }, 5000);
+    }
+
+    function stopAndRestartAutoSlide() {
+        startAutoSlide();
+    }
+
+    // Tạm dừng slideshow khi người dùng đang tương tác.
+    if (projectSlider) {
+        projectSlider.addEventListener("mouseenter", () => {
+            clearInterval(autoSlideTimer);
+        });
+
+        projectSlider.addEventListener("mouseleave", () => {
+            startAutoSlide();
+        });
+
+        // Trên điện thoại: chạm vào slider sẽ không làm đổi slide,
+        // chỉ reset thời gian tự động chuyển.
+        projectSlider.addEventListener("touchstart", stopAndRestartAutoSlide, {
+            passive: true
+        });
+    }
+
+    // Tự động chuyển slide mỗi 5 giây.
+    startAutoSlide();
+
+    // =========================
+    // SWIPE TRÊN ĐIỆN THOẠI
+    // =========================
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    if (projectSlider) {
+        projectSlider.addEventListener("touchstart", (e) => {
+            const touch = e.changedTouches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+        }, { passive: true });
+
+        projectSlider.addEventListener("touchend", (e) => {
+            const touch = e.changedTouches[0];
+            const deltaX = touch.clientX - touchStartX;
+            const deltaY = touch.clientY - touchStartY;
+
+            // Chỉ xử lý swipe ngang rõ ràng.
+            if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+                if (deltaX < 0) {
+                    changeProject(1);
+                } else {
+                    changeProject(-1);
+                }
+
+                startAutoSlide();
+            }
+        }, { passive: true });
+    }
     </script>
 
 </body>
