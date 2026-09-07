@@ -135,16 +135,26 @@
         }
 
         .avatar {
-        width: 220px;
-        height: 220px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 1px solid #ddd;
-        padding: 5px;
-        background: #fff;
-        transition:
-            transform 0.4s ease,
-            border-color 0.4s ease;
+            width: 220px;
+            height: 220px;
+            min-width: 220px;
+            min-height: 220px;
+
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background: #fff;
+
+            box-sizing: border-box;
+
+            flex-shrink: 0;
+
+            transition:
+                transform 0.4s ease,
+                border-color 0.4s ease;
         }
 
         .avatar:hover {
@@ -243,12 +253,19 @@
         }
 
         .section-title {
-            font-size: 34px;
-            margin-bottom: 45px;
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
         }
 
         .section-title span {
             color: #999;
+        }
+
+        .section-title h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0;
         }
 
 
@@ -616,7 +633,10 @@
             .avatar {
                 width: 160px;
                 height: 160px;
-                align-self: center;
+                min-width: 160px;
+                min-height: 160px;
+                aspect-ratio: 1 / 1;
+                flex-shrink: 0;
             }
 
             .hero h1 {
@@ -643,6 +663,32 @@
             section {
                 padding: 75px 0;
             }
+
+            .project-slide {
+                grid-template-columns: 1fr;
+            }
+
+            .project-slide img {
+                min-height: 230px;
+                height: 230px;
+            }
+
+            .project-content {
+                padding: 30px;
+                padding-bottom: 60px;
+            }
+
+            .project-content h3 {
+                font-size: 24px;
+            }
+
+            .project-prev {
+                left: 10px;
+            }
+
+            .project-next {
+                right: 10px;
+            }
         }
 
 
@@ -664,7 +710,187 @@
                 transition-duration: 0.01ms !important;
             }
         }
+        
+        .project-slider {
+    position: relative;
+    max-width: 1000px;
+    min-height: 420px;
+    margin: 50px auto 0;
+    overflow: hidden;
 
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    background: #fff;
+}
+
+        .project-slide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 420px;
+
+    position: absolute;
+    inset: 0;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: translateX(35px);
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0.6s ease;
+}
+
+.project-slide.active {
+    position: relative;
+
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    transform: translateX(0);
+}
+
+        .project-slide img {
+            width: 100%;
+            height: 100%;
+            min-height: 420px;
+            object-fit: cover;
+        }
+        .project-slide img {
+            transition:
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.6s ease;
+            
+            transform: scale(1.04);
+            filter: brightness(0.96);
+        }
+
+        .project-slide.active img {
+            transform: scale(1);
+            filter: brightness(1);
+        }
+
+        .project-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 50px;
+            opacity: 0;
+            transform: translateX(25px);
+
+            transition:
+                opacity 0.55s ease 0.12s,
+                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.12s;
+        }
+        .project-slide.active .project-content {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .project-number {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .project-content h3 {
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .project-content p {
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 28px;
+        }
+
+        .project-content .btn {
+            width: fit-content;
+        }
+
+        .project-prev,
+        .project-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 42px;
+            height: 42px;
+
+            border: 1px solid #0076DF;
+            border-radius: 50%;
+
+            background: white;
+            color: #0076DF;
+
+            font-size: 24px;
+            cursor: pointer;
+
+            transition:
+                background 0.3s ease,
+                color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .project-prev {
+            left: 15px;
+        }
+
+        .project-next {
+            right: 15px;
+        }
+
+        .project-prev:hover,
+        .project-next:hover {
+            background: #0076DF;
+            color: white;
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .project-dots {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            display: flex;
+            gap: 8px;
+        }
+
+        .project-dot {
+            width: 8px;
+            height: 8px;
+
+            border-radius: 50%;
+            background: #ccc;
+
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .project-dot.active {
+            width: 24px;
+            border-radius: 10px;
+            background: #0076DF;
+        }
+
+        .project-slide.slide-right {
+            transform: translateX(35px);
+        }
+
+        .project-slide.slide-left {
+            transform: translateX(-35px);
+        }
+
+        .project-slide.active {
+            position: relative;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
     </style>
 </head>
 
@@ -879,92 +1105,88 @@
          PROJECTS
     ========================= -->
 
-    <section id="projects">
-
-        <div class="container">
-
-            <h2 class="section-title reveal">
-                Dự án <span>/ Projects</span>
+    <section id="projects" class="section">
+    <div class="container">
+        <div class="section-title">
+            <h2 class="section-title reveal active">
+                Dự án của tôi <span>/ Projects</span>
             </h2>
+        </div>
 
+        <div class="project-slider">
 
-            <div class="projects">
+            <div class="project-slide active">
+                <img src="images/project1.jpg" alt="Personal Website">
 
-                <div class="project reveal">
-
-                    <div class="project-number">
-                        01
-                    </div>
-
-                    <h3>
-                        Personal Website
-                    </h3>
-
+                <div class="project-content">
+                    <span class="project-number">01 / 04</span>
+                    <h3>Personal Website</h3>
                     <p>
-                        Website cá nhân được xây dựng bằng
-                        HTML, CSS và JavaScript.
+                        Website cá nhân được xây dựng bằng HTML, CSS và JavaScript,
+                        tập trung vào thiết kế tối giản và responsive.
                     </p>
 
+                    <a href="#" class="btn">Xem dự án</a>
                 </div>
+            </div>
 
+            <div class="project-slide">
+                <img src="images/project2.jpg" alt="Smart Home">
 
-                <div class="project reveal">
-
-                    <div class="project-number">
-                        02
-                    </div>
-
-                    <h3>
-                        Smart Home
-                    </h3>
-
+                <div class="project-content">
+                    <span class="project-number">02 / 04</span>
+                    <h3>Smart Home</h3>
                     <p>
-                        Các dự án liên quan đến Home Assistant,
-                        IoT và tự động hóa.
+                        Hệ thống nhà thông minh kết hợp Home Assistant,
+                        IoT và các thiết bị điều khiển trong gia đình.
                     </p>
 
+                    <a href="#" class="btn">Xem dự án</a>
                 </div>
+            </div>
 
+            <div class="project-slide">
+                <img src="images/project3.jpg" alt="Networking">
 
-                <div class="project reveal">
-
-                    <div class="project-number">
-                        03
-                    </div>
-
-                    <h3>
-                        Networking
-                    </h3>
-
+                <div class="project-content">
+                    <span class="project-number">03 / 04</span>
+                    <h3>Networking</h3>
                     <p>
-                        Các dự án và nghiên cứu về mạng,
-                        Wi-Fi và hệ thống thiết bị.
+                        Thiết lập và tối ưu hệ thống mạng,
+                        Wi-Fi và các thiết bị mạng trong thực tế.
                     </p>
 
+                    <a href="#" class="btn">Xem dự án</a>
                 </div>
+            </div>
 
+            <div class="project-slide">
+                <img src="images/project4.jpg" alt="Coming Soon">
 
-                <div class="project reveal">
-
-                    <div class="project-number">
-                        04
-                    </div>
-
-                    <h3>
-                        Coming Soon
-                    </h3>
-
+                <div class="project-content">
+                    <span class="project-number">04 / 04</span>
+                    <h3>Coming Soon</h3>
                     <p>
-                        Những dự án mới sẽ được cập nhật tại đây.
+                        Một dự án mới đang được phát triển.
                     </p>
 
+                    <a href="#" class="btn">Coming Soon</a>
                 </div>
+            </div>
 
+            <button class="project-prev" onclick="changeProject(-1)">‹</button>
+            <button class="project-next" onclick="changeProject(1)">›</button>
+
+            <div class="project-dots">
+                <span class="project-dot active" onclick="showProject(0)"></span>
+                <span class="project-dot" onclick="showProject(1)"></span>
+                <span class="project-dot" onclick="showProject(2)"></span>
+                <span class="project-dot" onclick="showProject(3)"></span>
             </div>
 
         </div>
-
-    </section>
+    </div>
+</section>
 
 
     <!-- =========================
@@ -1093,6 +1315,63 @@
             alert('Nội dung này không cho phép sao chép.');
         }); 
 
+    </script>
+    <script>
+    let currentProject = 0;
+    let projectDirection = 1;
+
+    const projectSlides = document.querySelectorAll(".project-slide");
+    const projectDots = document.querySelectorAll(".project-dot");
+
+    function showProject(index, direction = 1) {
+
+        projectSlides.forEach(slide => {
+            slide.classList.remove("active");
+            slide.classList.remove("slide-left", "slide-right");
+        });
+
+        projectDots.forEach(dot => {
+            dot.classList.remove("active");
+        });
+
+        currentProject = index;
+
+        const currentSlide = projectSlides[currentProject];
+
+        if (direction > 0) {
+            currentSlide.classList.add("slide-right");
+        } else {
+            currentSlide.classList.add("slide-left");
+        }
+
+        // ép browser nhận trạng thái ban đầu trước khi active
+        requestAnimationFrame(() => {
+            currentSlide.classList.add("active");
+        });
+
+        projectDots[currentProject].classList.add("active");
+    }
+
+    function changeProject(direction) {
+
+        currentProject += direction;
+
+        if (currentProject >= projectSlides.length) {
+            currentProject = 0;
+        }
+
+        if (currentProject < 0) {
+            currentProject = projectSlides.length - 1;
+        }
+
+        showProject(currentProject, direction);
+    }
+
+
+    // Tự động chuyển slide mỗi 5 giây
+    setInterval(() => {
+        changeProject(1);
+    }, 5000);
     </script>
 
 </body>
