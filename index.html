@@ -176,7 +176,7 @@
 
         .hello {
             color: #777;
-            font-size: 20px;
+            font-size: 15px;
             margin-bottom: 15px;
         }
 
@@ -798,6 +798,354 @@
         }
 
         /* =========================
+           MOBILE OPTIMIZATION V2
+           ========================= */
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (max-width: 700px) {
+
+            .container {
+                width: min(100% - 32px, 1100px);
+            }
+
+            nav {
+                background: rgba(245, 245, 245, 0.94);
+            }
+
+            .nav-inner {
+                height: 62px;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            /* Giữ menu trên mobile, cuộn ngang nếu màn hình quá hẹp. */
+            .nav-links {
+                display: flex;
+                gap: 8px;
+                max-width: 72%;
+                overflow-x: auto;
+                overflow-y: hidden;
+                white-space: nowrap;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-links::-webkit-scrollbar {
+                display: none;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 8px 9px;
+                font-size: 12px;
+                border-radius: 20px;
+            }
+
+            .nav-links a:active {
+                background: rgba(0, 118, 223, 0.08);
+            }
+
+            .hero {
+                min-height: auto;
+                padding-top: 105px;
+                padding-bottom: 72px;
+            }
+
+            .hero-layout {
+                width: 100%;
+                gap: 30px;
+                align-items: center;
+            }
+
+            .hero-content {
+                width: 100%;
+            }
+
+            .avatar {
+                width: 150px;
+                height: 150px;
+                min-width: 150px;
+                min-height: 150px;
+                padding: 4px;
+            }
+
+            .hero h1 {
+                width: 100%;
+                font-size: clamp(42px, 13vw, 66px);
+                line-height: 1.02;
+                letter-spacing: -2.5px;
+                overflow-wrap: anywhere;
+                margin-bottom: 20px;
+            }
+
+            .hero-description {
+                width: 100%;
+                font-size: 15px;
+                line-height: 1.75;
+                margin-bottom: 28px;
+            }
+
+            .buttons {
+                gap: 10px;
+            }
+
+            .btn {
+                min-height: 44px;
+                padding: 11px 18px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            section {
+                padding: 68px 0;
+            }
+
+            .section-title {
+                gap: 10px;
+                flex-wrap: nowrap;
+                white-space: nowrap;
+            }
+
+            .section-title h2 {
+                font-size: 25px;
+            }
+
+            .section-title span {
+                font-size: 15px;
+            }
+
+            .about-text {
+                font-size: 15px;
+                line-height: 1.75;
+            }
+
+            .info {
+                gap: 12px;
+            }
+
+            .info-item {
+                padding: 16px;
+            }
+
+            .skills,
+            .projects {
+                gap: 14px;
+            }
+
+            .skill,
+            .project {
+                padding: 22px;
+            }
+
+            /* Slideshow: ảnh giữ đúng tỷ lệ, không bị bóp hoặc cắt nội dung. */
+            .project-slider {
+                margin-top: 28px;
+                min-height: 0;
+                border-radius: 14px;
+                touch-action: pan-y;
+            }
+
+            .project-slide {
+                grid-template-columns: 1fr;
+                min-height: 0;
+            }
+
+            .project-slide img {
+                width: 100%;
+                height: auto;
+                min-height: 0;
+                aspect-ratio: 16 / 9;
+                object-fit: contain;
+                object-position: center;
+                background: #f3f3f3;
+            }
+
+            .project-content {
+                min-height: 235px;
+                padding: 25px 22px 55px;
+            }
+
+            .project-number {
+                font-size: 11px;
+                margin-bottom: 9px;
+            }
+
+            .project-content h3 {
+                font-size: 22px;
+                line-height: 1.25;
+                margin-bottom: 10px;
+            }
+
+            .project-content p {
+                font-size: 14px;
+                line-height: 1.65;
+                margin-bottom: 18px;
+            }
+
+            .project-content .btn {
+                min-height: 40px;
+                padding: 9px 16px;
+                font-size: 13px;
+            }
+
+            .project-prev,
+            .project-next {
+                width: 38px;
+                height: 38px;
+                top: calc((100vw - 32px) * 0.28125);
+                font-size: 21px;
+                background: rgba(255, 255, 255, 0.90);
+                box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            }
+
+            .project-prev {
+                left: 9px;
+            }
+
+            .project-next {
+                right: 9px;
+            }
+
+            .project-dots {
+                bottom: 14px;
+                gap: 7px;
+            }
+
+            .project-dot {
+                width: 7px;
+                height: 7px;
+            }
+
+            .project-dot.active {
+                width: 19px;
+            }
+
+            .contact {
+                padding-bottom: 85px;
+            }
+
+            .contact h2 {
+                font-size: clamp(34px, 10vw, 50px);
+                line-height: 1.05;
+            }
+
+            .socials {
+                gap: 9px;
+            }
+        }
+
+        @media (max-width: 420px) {
+
+            .container {
+                width: calc(100% - 28px);
+            }
+
+            .nav-links {
+                max-width: 68%;
+            }
+
+            .nav-links a {
+                padding: 7px 7px;
+                font-size: 11px;
+            }
+
+            .hero {
+                padding-top: 96px;
+            }
+
+            .avatar {
+                width: 135px;
+                height: 135px;
+                min-width: 135px;
+                min-height: 135px;
+            }
+
+            .hero h1 {
+                font-size: clamp(39px, 12.5vw, 56px);
+                letter-spacing: -2px;
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .section-title h2 {
+                font-size: 22px;
+            }
+
+            .section-title span {
+                font-size: 13px;
+            }
+
+            .project-content {
+                min-height: 225px;
+                padding: 23px 19px 52px;
+            }
+
+            .project-content h3 {
+                font-size: 21px;
+            }
+
+            .project-content p {
+                font-size: 13.5px;
+            }
+
+            .project-prev,
+            .project-next {
+                width: 34px;
+                height: 34px;
+                top: calc((100vw - 28px) * 0.28125);
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            @media (max-width: 700px) {
+                nav {
+                    background: rgba(10, 10, 10, 0.90);
+                }
+
+                .nav-links a:active {
+                    background: rgba(255, 255, 255, 0.06);
+                }
+
+                .project-slider {
+                    background: #0e0e0e;
+                }
+
+                .project-slide img {
+                    background: #171717;
+                }
+
+                .project-prev,
+                .project-next {
+                    background: rgba(20, 20, 20, 0.90);
+                    color: #fff;
+                    border-color: #444;
+                }
+            }
+        }
+
+
+
+        /* =========================
            REDUCE MOTION
         ========================= */
 
@@ -1066,6 +1414,7 @@
 
     <header class="hero">
         <div class="container">
+
         <div class="hero-layout">
 
             <div class="hero-content">
@@ -1106,7 +1455,7 @@
         </div>
 
     </div>
-    </header>
+</header>
 
 
     <!-- =========================
@@ -1231,11 +1580,9 @@
 
     <section id="projects" class="section">
     <div class="container">
-        <div class="section-title">
-            <h2 class="section-title reveal active">
-                Dự án của tôi <span>/ Projects</span>
-            </h2>
-        </div>
+        <h2 class="section-title reveal active">
+            Dự án của tôi <span>/ Projects</span>
+        </h2>
 
         <div class="project-slider">
 
@@ -1310,7 +1657,7 @@
 
         </div>
     </div>
-    </section>
+</section>
 
 
     <!-- =========================
@@ -1531,21 +1878,30 @@
 
     let touchStartX = 0;
     let touchStartY = 0;
+    let swipeTarget = false;
 
     if (projectSlider) {
         projectSlider.addEventListener("touchstart", (e) => {
+            const target = e.target;
+            swipeTarget = !!target.closest("button, a, .project-dot");
+
             const touch = e.changedTouches[0];
             touchStartX = touch.clientX;
             touchStartY = touch.clientY;
         }, { passive: true });
 
         projectSlider.addEventListener("touchend", (e) => {
+            if (swipeTarget) {
+                swipeTarget = false;
+                return;
+            }
+
             const touch = e.changedTouches[0];
             const deltaX = touch.clientX - touchStartX;
             const deltaY = touch.clientY - touchStartY;
 
-            // Chỉ xử lý swipe ngang rõ ràng.
-            if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+            // Chỉ xử lý swipe ngang rõ ràng, tránh ảnh hưởng thao tác cuộn dọc.
+            if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) {
                 if (deltaX < 0) {
                     changeProject(1);
                 } else {
